@@ -14,7 +14,8 @@ const questions = () => {
             {name: 'View all roles', value: 'view_roles'},
             {name: 'Add an employee', value: 'add_employee'},
             {name:'Add a role', value:'add_role'},
-            {name:'Add a department', value:'add_department'}
+            {name:'Add a department', value:'add_department'},
+            {name:'Update an employee role', value: 'update_employee_role'}
             ]
         },
         {
@@ -108,6 +109,45 @@ const questions = () => {
             }
 
         },
+        {
+            type: 'input',
+            name: 'departmentName',
+            message: 'What is the new department name?',
+            when: ({whatToDo}) =>{
+                if(whatToDo === 'add_department'){
+                return true;
+                } else {
+                return false;
+                }
+            }
+
+        },
+        {
+            type: 'input',
+            name: 'updateEmployeeRoleEmployeeId',
+            message: 'What is the ID of the employee you wish to change the role of?',
+            when: ({whatToDo}) =>{
+                if(whatToDo === 'update_employee_role'){
+                return true;
+                } else {
+                return false;
+                }
+            }
+
+        },
+        {
+            type: 'input',
+            name: 'updateEmployeeRoleId',
+            message: 'What is the new role ID of the employee?',
+            when: ({whatToDo}) =>{
+                if(whatToDo === 'update_employee_role'){
+                return true;
+                } else {
+                return false;
+                }
+            }
+
+        }
       ])
     };
 
@@ -143,7 +183,7 @@ questions()
         console.table(row)});
         break;
         case 'add_employee':
-            const newEmployeeAnswersArray = [answer.employeeFirstName, answer.employeeLastName, answer.employeeRoleId, answer.answeremployeeMangerId ];
+            const newEmployeeAnswersArray = [answer.employeeFirstName, answer.employeeLastName, answer.employeeRoleId, answer.employeeMangerId ];
             console.log(newEmployeeAnswersArray);
             db.query(
             'INSERT INTO `employee`(first_name,last_name,role_id,manager_id) VALUES (?,?,?,?);', newEmployeeAnswersArray ,(err,row) =>{
@@ -162,5 +202,24 @@ questions()
                 };
         console.table(row)});
         break;
+        case 'add_department':
+            const newDepartmentAnswersArray = [answer.departmentName];
+            console.log(newDepartmentAnswersArray);
+            db.query(
+            'INSERT INTO `department`(name) VALUES (?);', newDepartmentAnswersArray ,(err,row) =>{
+                if (err){
+                    console.log('ERROR')
+                };
+        console.table(row)});
+        break;
+        case 'update_employee_role':
+            const updatedEmployeeRoleAnswersArray = [answer.updateEmployeeRoleId, answer.updateEmployeeRoleEmployeeId ];
+            // console.log(updatedEmployeeRoleAnswersArray);
+            db.query(
+            'UPDATE employee set role_id = ? WHERE id= ?;', updatedEmployeeRoleAnswersArray ,(err,row) =>{
+                if (err){
+                    console.log('ERROR')
+                };
+        console.table(row)});
         default:}
         })
