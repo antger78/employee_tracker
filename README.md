@@ -13,6 +13,10 @@
   * [Contributions](#Contributions)
   * [License](#license)
   * [Questions](#Questions)
+
+  ## Images
+
+  ![Homepage](https://github.com/antger78/employee_tracker/blob/main/Readme_Screenshots/homepage.png?raw=true)
   
   
   ## Installation
