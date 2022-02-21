@@ -17,7 +17,8 @@
   ## Images
 
   ![Homepage](https://github.com/antger78/employee_tracker/blob/main/Readme_Screenshots/homepage.png?raw=true)
-  
+  ![video](https://github.com/antger78/employee_tracker/blob/main/Readme_Screenshots/video.webm?raw=true)
+
   
   ## Installation
   
